@@ -174,7 +174,8 @@ static bool convert_cypher_walker(Node *node, ParseState *pstate)
         if (IsA(funcexpr, SQLValueFunction)
                 || IsA(funcexpr, CoerceViaIO)
                 || IsA(funcexpr, Var)   || IsA(funcexpr, OpExpr)
-                || IsA(funcexpr, Const) || IsA(funcexpr, BoolExpr))
+                || IsA(funcexpr, Const) || IsA(funcexpr, BoolExpr)
+                || IsA(funcexpr, JsonConstructorExpr))
         {
             return false;
         }
@@ -325,7 +326,8 @@ static bool is_func_cypher(FuncExpr *funcexpr)
     if (IsA(funcexpr, SQLValueFunction)
             || IsA(funcexpr, CoerceViaIO)
             || IsA(funcexpr, Var)   || IsA(funcexpr, OpExpr)
-            || IsA(funcexpr, Const) || IsA(funcexpr, BoolExpr))
+            || IsA(funcexpr, Const) || IsA(funcexpr, BoolExpr)
+            || IsA(funcexpr, JsonConstructorExpr))
     {
         return false;
     }
