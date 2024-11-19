@@ -3253,20 +3253,20 @@ SELECT * FROM cypher('graph_395', $$ CREATE (n:Project {name: 'Project A'}),
 
 SELECT * FROM cypher('graph_395', $$ MATCH (p:Project)-[:Has]->(t:Task)-[:AssignedTo]->(u:Person)
                                      WITH p, t, collect(u) AS users
-                                     WITH p, {tn: t.name, users: users} AS task
+                                     WITH p, {tn: t.name, users: users} AS task ORDER BY t.name ASC
                                      RETURN task $$) AS (p agtype);
 
 SELECT * FROM cypher('graph_395', $$ MATCH (p:Project)-[:Has]->(t:Task)-[:AssignedTo]->(u:Person)
                                      WITH p, t, collect(u) AS users
-                                     WITH p, {tn: t.name, users: users} AS task
-                                     WITH p, collect(task) AS tasks
+                                     WITH p, {tn: t.name, users: users} AS task ORDER BY t.name ASC
+                                     WITH p, collect(task) AS tasks ORDER BY collect(task) ASC
                                      RETURN tasks $$) AS (p agtype);
 
 SELECT * FROM cypher('graph_395', $$ MATCH (p:Project)-[:Has]->(t:Task)-[:AssignedTo]->(u:Person)
                                      WITH p, t, collect(u) AS users
-                                     WITH p, {tn: t.name, users: users} AS task
-                                     WITH p, collect(task) AS tasks
-                                     WITH {pn: p.name, tasks:tasks} AS project
+                                     WITH p, {tn: t.name, users: users} AS task ORDER BY t.name ASC
+                                     WITH p, collect(task) AS tasks ORDER BY collect(task) ASC
+                                     WITH {pn: p.name, tasks:tasks} AS project  ORDER BY p.name ASC
                                      RETURN project $$) AS (p agtype);
 --
 -- issue 1044 - array functions not recognizing vpc

@@ -161,8 +161,8 @@ SELECT name, namespace FROM ag_graph WHERE name = 'GraphA';
 (0 rows)
 
 SELECT * FROM pg_namespace WHERE nspname = 'GraphA';
- oid | nspname | nspowner | nspacl 
------+---------+----------+--------
+ oid | nspname | nspowner | nspsecofficer | nspacl 
+-----+---------+----------+---------------+--------
 (0 rows)
 
 -- Sanity check that graphx does not exist - should return 0.
